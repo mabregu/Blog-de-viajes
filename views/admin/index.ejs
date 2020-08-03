@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Blog Viajes</title>
+  <link rel="stylesheet" href="/stylesheets/estilos.css">
+  <link rel="stylesheet" href="/stylesheets/mini-default.min.css">
+</head>
+
+<body>
+  <% include ../partials/encabezado_privado %>
+
+  <div class="container">
+    <h1>Admin - Mis publicaciones</h1>
+    <hr>
+
+    <div class="row">
+
+      <div class="col-sm-12">
+
+        <% if (mensaje && mensaje.length > 0) { %>
+        <h4><span class="icon-info"></span>
+          <%=mensaje%>
+        </h4>
+        <% } %>
+
+        <table>
+          <thead>
+            <tr>
+              <th>titulo</th>
+              <th>resumen</th>
+              <th>votos</th>
+              <th>acciones</th>
+            </tr>
+          </thead>
+          <tbody>
+            <% publicaciones.forEach( (publicacion) => { %>
+            <tr>
+              <td>
+                <%=publicacion.titulo%>
+              </td>
+              <td>
+                <%=publicacion.resumen%>
+              </td>
+              <td>
+                <%=publicacion.votos%>
+              </td>
+              <td>
+                <a href="/admin/editar/<%=publicacion.id%>"><span class="icon-edit"></span>
+                  Editar
+                </a>
+                |
+                <a href="/admin/procesar_eliminar/<%=publicacion.id%>" onclick="return confirm('¿Está seguro de eliminar: <%=publicacion.titulo%>?')"><span
+                    class="icon-alert"></span>
+                  Eliminar
+                </a>
+              </td>
+            </tr>
+            <% }) %>
+          </tbody>
+        </table>
+
+        <hr>
+        <a class="button" href="/admin/agregar">Agregar Publicación</a>
+      </div>
+    </div>
+
+  </div>
+
+  <% include ../partials/pie %>
+  <script src="/javascripts/script.js"></script>
+</body>
+
+</html>
